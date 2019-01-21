@@ -48,6 +48,18 @@ export default class App extends Component {
     });
   };
 
+  updateFish = (key, updatedFish) => {
+    const fishes = { ...this.state.fishes };
+    fishes[key] = updatedFish;
+    this.setState({ fishes });
+  };
+
+  deleteFish = key => {
+    const fishes = { ...this.state.fishes };
+    fishes[key] = null;
+    this.setState({ fishes });
+  };
+
   loadSampleFishes = () => {
     this.setState({
       fishes: sampleFishes
@@ -59,6 +71,15 @@ export default class App extends Component {
     const order = { ...this.state.order };
     //2. Eiter add to the order or update the order
     order[key] = order[key] + 1 || 1;
+    //3. Call setState to update the state
+    this.setState({ order });
+  };
+
+  removeFromOrder = key => {
+    //1. a copy of this.state.
+    const order = { ...this.state.order };
+    //2. Eiter add to the order or update the order
+    delete order[key];
     //3. Call setState to update the state
     this.setState({ order });
   };
@@ -75,14 +96,22 @@ export default class App extends Component {
                 index={key}
                 details={this.state.fishes[key]}
                 addToOrder={this.addToOrder}
+                removeFromOrder={this.removeFromOrder}
               />
             ))}
           </ul>
         </div>
-        <Order fishes={this.state.fishes} order={this.state.order} />
+        <Order
+          fishes={this.state.fishes}
+          order={this.state.order}
+          removeFromOrder={this.removeFromOrder}
+        />
         <Inventory
+          updateFish={this.updateFish}
           addFish={this.addFish}
           loadSampleFishes={this.loadSampleFishes}
+          deleteFish={this.deleteFish}
+          fishes={this.state.fishes}
         />
       </div>
     );

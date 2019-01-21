@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class AddFishForms extends Component {
+export default class AddFishForm extends Component {
   nameRef = React.createRef();
   priceRef = React.createRef();
   statusRef = React.createRef();
