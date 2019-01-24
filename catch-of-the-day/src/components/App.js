@@ -88,7 +88,7 @@ export default class App extends Component {
     return (
       <div className="catch-of-the-day">
         <div className="menu">
-          <Header tagline="Fresh Seafod Market" />
+          <Header tagline={"Fresh Seafod Market"} />
           <ul className="fishes">
             {Object.keys(this.state.fishes).map(key => (
               <Fish
@@ -112,6 +112,7 @@ export default class App extends Component {
           loadSampleFishes={this.loadSampleFishes}
           deleteFish={this.deleteFish}
           fishes={this.state.fishes}
+          storeId={this.props.match.params.storeId}
         />
       </div>
     );
